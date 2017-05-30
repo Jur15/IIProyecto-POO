@@ -3,8 +3,7 @@ import java.util.ArrayList;
 public class VideoProcesor implements IConstants
 {
 	private MCSClient Client;
-	private ArrayList<Body> AllBodies;
-	private ArrayList<String> VideoResponses;
+	private ArrayList<Body> Bodies;
 	
 	public VideoProcesor()
 	{
@@ -15,11 +14,21 @@ public class VideoProcesor implements IConstants
 	{
 		try
 		{
-			for(String video : VIDEO_LIST)
+			int vidCount = 0;
+			for(String videoURL : VIDEO_LIST)
 			{
-				VideoResponses.addAll(Client.processVideo(video));
-				Thread.sleep(1);
-				//AllBodies.addAll(Client.getBodies());
+				vidCount++;
+				String operation = Client.processVideo(videoURL);
+				if(operation!= null)
+				{
+					Client.processJSON(operation, vidCount);
+					createBodyArray("json\\Video"+vidCount+".json");
+				}
+				else
+				{
+					System.out.println("Error en el post");
+					break;
+				}
 			}
 		}
 		catch (InterruptedException e) 
@@ -28,8 +37,13 @@ public class VideoProcesor implements IConstants
 		}
 	}
 	
-	public String getResult()
+	private void createBodyArray(String pJSONFile)
 	{
-		return "";
+		
+	}
+	
+	public ArrayList<Body> getBodies()
+	{
+		return Bodies;
 	}
 }

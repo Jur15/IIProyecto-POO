@@ -1,23 +1,38 @@
-import java.util.ArrayList;
-
 public class MCSClient implements IConstants
 {
-	private ArrayList<Body> Bodies;
-	private JSONParser Parser;
-	
-	public ArrayList<String> processVideo(String pVideoURL)
+	public String processVideo(String pVideoURL) throws InterruptedException
 	{
-		ArrayList<String> postResponse = HTTPRequester.postRequest(pVideoURL);
-		return postResponse;
+		String videoResponse = HTTPRequester.postRequest(pVideoURL, SUBSCRIPTION_KEY);
+		if(videoResponse != null)
+		{
+			System.out.println("Post hecho");
+			return videoResponse;
+		}
+		else
+		{
+			System.out.println("Error post request");
+			return null;
+		}
 	}
 	
-	private void addBodies(String pJSONResult)
+	public void processJSON(String pOperLocation,int pVidNumber) throws InterruptedException
 	{
-		//Adds each body to the arraylist
-	}
-	
-	public ArrayList<Body> getBodies()
-	{
-		return Bodies;
+		String operResult = null;
+		while(true)
+		{
+			operResult = HTTPRequester.getOperationResult(pOperLocation, SUBSCRIPTION_KEY);
+			System.out.println(operResult);
+			if(operResult.contains("Succeeded") || operResult.contains("Failed") || operResult.contains("error"))
+				break;
+			Thread.sleep(WAIT_BETWEEN_RESULT_REQUEST);
+		}
+		if(operResult.contains("Succeeded"))
+		{
+			System.out.println("Contenido JSON obtenido");
+			//String jsonContent = jsonContent.substring(beginIndex)
+			//JSONParser.parseStringJSON(jsonContent, pVidNumber);
+		}
+		else
+			System.out.println("Fallo en operacion");
 	}
 }

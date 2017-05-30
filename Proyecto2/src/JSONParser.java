@@ -1,18 +1,18 @@
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class JSONParser
 {
-	public void setObject(String pJSON)
+	public static void parseStringJSON(String pContent,int pVidNumber)
 	{
-		
-	}
-	
-	public void setCurrentObject(String pName)
-	{
-		
-	}
-	
-	public String getValue(String pKey)
-	{
-		return "";
+		try (FileWriter file = new FileWriter("json\\Video"+pVidNumber+".json"))
+		{
+	        file.write(pContent);
+	        file.flush();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
