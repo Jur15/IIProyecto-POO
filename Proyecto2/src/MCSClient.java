@@ -1,8 +1,17 @@
 public class MCSClient implements IConstants
 {
-	public String processVideo(String pVideoURL) throws InterruptedException
+	private HTTPRequester Requestor;
+	private JSONParser Parser;
+	
+	public MCSClient()
 	{
-		String videoResponse = HTTPRequester.postRequest(pVideoURL, SUBSCRIPTION_KEY);
+		Requestor = new HTTPRequester();
+		Parser = new JSONParser();
+	}
+	
+	public String processVideo(String pVideoURL)
+	{
+		String videoResponse = Requestor.postRequest(pVideoURL, SUBSCRIPTION_KEY);
 		if(videoResponse != null)
 		{
 			System.out.println("Post hecho");
@@ -20,7 +29,7 @@ public class MCSClient implements IConstants
 		String operResult = null;
 		while(true)
 		{
-			operResult = HTTPRequester.getOperationResult(pOperLocation, SUBSCRIPTION_KEY);
+			operResult = Requestor.getOperationResult(pOperLocation, SUBSCRIPTION_KEY);
 			System.out.println(operResult);
 			if(operResult.contains("Succeeded") || operResult.contains("Failed") || operResult.contains("error"))
 				break;
@@ -30,7 +39,7 @@ public class MCSClient implements IConstants
 		{
 			System.out.println("Contenido JSON obtenido");
 			//String jsonContent = jsonContent.substring(beginIndex)
-			//JSONParser.parseStringJSON(jsonContent, pVidNumber);
+			//Parser.parseStringJSON(jsonContent, pVidNumber);
 		}
 		else
 			System.out.println("Fallo en operacion");

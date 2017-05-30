@@ -15,7 +15,7 @@ import org.apache.http.impl.client.HttpClients;
 
 public class HTTPRequester
 {
-	public static String postRequest(String pVideoURL,String pMSKey)
+	public String postRequest(String pVideoURL,String pMSKey)
     {
         HttpClient httpclient = HttpClients.createDefault();
 
@@ -45,7 +45,7 @@ public class HTTPRequester
         return null;
     }
 	
-	public static String getOperationResult(String pResultURL,String pMSKey)
+	public String getOperationResult(String pResultURL,String pMSKey)
     {
         HttpClient httpclient = HttpClients.createDefault();
         try
