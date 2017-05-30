@@ -1,20 +1,39 @@
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class ChartManager
 {
-	public String generate(GraphType pType,ArrayList<Body> pBodies)
+	public String generateGraph(GraphType pType,ArrayList<Body> pBodies)
 	{
-		String graphURL = "";
-		return graphURL;
+		String graphHTML = "Crowly-"+UUID.randomUUID();
+		if(pType == GraphType.SCATTER)
+		{
+			
+		}
+		else if(pType == GraphType.BAR)
+		{
+			
+		}
+		else
+		{
+			
+		}
+		return graphHTML;
 	}
 	
-	private void createGraphFile(String pContent)
+	public void openBrowser(String pFilepath)
 	{
-		
-	}
-	
-	private void openBrowser(String pFile)
-	{
-		
+		File htmlFile = new File(pFilepath);
+		try
+		{
+			Desktop.getDesktop().browse(htmlFile.toURI());
+		}
+		catch (IOException e)
+		{
+			System.out.println("Error while opening html file");
+		}
 	}
 }
