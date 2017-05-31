@@ -3,7 +3,7 @@ import java.io.IOException;
 
 public class JSONParser
 {
-	public static void parseStringJSON(String pContent,int pVidNumber)
+	public void parseStringJSON(String pContent,int pVidNumber)
 	{
 		try (FileWriter file = new FileWriter("json\\Video"+pVidNumber+".json"))
 		{

@@ -20,31 +20,31 @@ public class Body
 		return Time;
 	}
 
-	public void setTime(Date time) {
-		Time = time;
+	public void setTime(Date pTime) {
+		Time = pTime;
 	}
 
 	public int getXPos() {
 		return XPos;
 	}
 
-	public void setXPos(int xPos) {
-		XPos = xPos;
+	public void setXPos(int pXPos) {
+		XPos = pXPos;
 	}
 
 	public int getYPos() {
 		return YPos;
 	}
 
-	public void setYPos(int yPos) {
-		YPos = yPos;
+	public void setYPos(int pYPos) {
+		YPos = pYPos;
 	}
 
 	public UUID getID() {
 		return ID;
 	}
 
-	public void setID(UUID iD) {
-		ID = iD;
+	public void setID(UUID pID) {
+		ID = pID;
 	}
 }
